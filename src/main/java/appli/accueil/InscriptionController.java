@@ -7,6 +7,7 @@ import javafx.scene.*;
 import javafx.scene.text.Text;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import session.SessionUtilisateur;
 
 import java.io.IOException;
 
@@ -49,5 +50,12 @@ public class InscriptionController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+    @FXML
+    protected void handleLogout() {
+        SessionUtilisateur.getInstance().deconnecter();
+        System.out.println("Utilisateur déconnecté.");
+// Redirection vers la page de connexion
     }
 }
