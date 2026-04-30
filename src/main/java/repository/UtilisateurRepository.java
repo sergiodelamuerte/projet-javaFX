@@ -6,9 +6,11 @@ import java.sql.*;
 import java.util.ArrayList;
 public class UtilisateurRepository {
     private Connection connection;
+
     public UtilisateurRepository() {
         connection = Database.getConnexion();
     }
+
     public void ajouterUtilisateur(Utilisateur utilisateur) {
         String sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, role) VALUES (?, ?, ?, ?, ?)";
         try {
@@ -24,30 +26,32 @@ public class UtilisateurRepository {
             System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
     }
-public Utilisateur getUtilisateurParEmail(String email) {
+
+    public Utilisateur getUtilisateurParEmail(String email) {
         String sql = "SELECT * FROM utilisateurs WHERE email = ?";
-        try{
+        try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, email);
-           ResultSet Rs = stmt.executeQuery();
-            if (Rs.next()){
-                Utilisateur user = new Utilisateur(Rs.getInt("id"),Rs.getString ("nom"), Rs.getString("prenom"), Rs.getString("email"), Rs.getString("mdp"));
+            ResultSet Rs = stmt.executeQuery();
+            if (Rs.next()) {
+                Utilisateur user = new Utilisateur(Rs.getInt("id"), Rs.getString("nom"), Rs.getString("prenom"), Rs.getString("email"), Rs.getString("mdp"));
                 return user;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-    return null;
-}
+        return null;
+    }
+
     public ArrayList<Utilisateur> getTousLesUtilisateurs() {
         String sql = "SELECT * FROM utilisateurs";
         ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
-        try{
+        try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet Rs = stmt.executeQuery();
-            while (Rs.next()){
-                Utilisateur user = new Utilisateur(Rs.getInt("id"),Rs.getString ("nom"), Rs.getString("prenom"), Rs.getString("email"), Rs.getString("mdp"));
+            while (Rs.next()) {
+                Utilisateur user = new Utilisateur(Rs.getInt("id"), Rs.getString("nom"), Rs.getString("prenom"), Rs.getString("email"), Rs.getString("mdp"));
                 utilisateurs.add(user);
 
 
@@ -58,16 +62,45 @@ public Utilisateur getUtilisateurParEmail(String email) {
         return utilisateurs;
 
     }
-    public void supprimerUtilisateurParEmail(String email) {
+
+    public boolean supprimerUtilisateurParEmail(String email) {
         String sql = "Delete FROM utilisateurs WHERE email = ?";
-        try{
+        try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, email);
-             stmt.executeUpdate();
+            stmt.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+        return false;
+    }
+
+    public void mettreAJourUtilisateur(Utilisateur utilisateur) {
+        String sql = "UPDATE utilisateurs SET nom = ?, prenom = ?, mot_de_passe = ? WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, utilisateur.getNom());
+            stmt.setString(2, utilisateur.getPrenom());
+            stmt.setString(3, utilisateur.getMotDePasse());
+            stmt.setString(4, utilisateur.getEmail());
+
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enregistrerUtilisateur(Utilisateur utilisateur) {
+    }
+
+    public Utilisateur getAllUsers() {
+        return null;
+    }
+
+    public void update(Utilisateur utilisateurSel) {
     }
 }
+
+
+

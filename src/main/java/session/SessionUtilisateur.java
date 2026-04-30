@@ -16,6 +16,9 @@ public class SessionUtilisateur {
         return instance;
     }
 
+    public static void Utilisateur(Utilisateur utilisateur) {
+    }
+
     public void sauvegardeSession(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
     }

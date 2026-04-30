@@ -4,15 +4,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
-import javafx.scene.text.Text;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import session.SessionUtilisateur;
-
-import java.io.IOException;
+import model.Utilisateur;
+import repository.UtilisateurRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class InscriptionController {
-    @FXML private Text InscriptionLabel;
+
+    private UtilisateurRepository utilisateurRepository = new UtilisateurRepository();
 
     @FXML private TextField nom;
     @FXML private TextField prenom;
@@ -22,22 +22,41 @@ public class InscriptionController {
     @FXML private Label labelErreurInsc;
 
     @FXML
-    protected void onInscrireButtonClick() {
+    protected void onInscrireButtonClick(ActionEvent event) {
 
-        if (nom.getText().isEmpty() || prenom.getText().isEmpty()
-                || email.getText().isEmpty()
-                || mdp.getText().isEmpty()
-                || confirmation.getText().isEmpty()) {
+        String n = nom.getText();
+        String p = prenom.getText();
+        String e = email.getText();
+        String m = mdp.getText();
+        String c = confirmation.getText();
 
+        if (n.isEmpty() || p.isEmpty() || e.isEmpty() || m.isEmpty() || c.isEmpty()) {
             labelErreurInsc.setText("Les champs sont vides...");
+            return;
+        }
 
-        } else if (!mdp.getText().equals(confirmation.getText())) {
-
+        if (!m.equals(c)) {
             labelErreurInsc.setText("Les mots de passe ne correspondent pas");
+            return;
+        }
 
-        } else {
-            System.out.println("Inscription OK : " + nom.getText());
-            labelErreurInsc.setText("");
+        if (utilisateurRepository.getUtilisateurParEmail(e) != null) {
+            labelErreurInsc.setText("Un utilisateur existe déjà avec cet email");
+            return;
+        }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String hash = encoder.encode(m);
+
+        Utilisateur utilisateur = new Utilisateur(n, p, e, hash);
+        utilisateurRepository.enregistrerUtilisateur(utilisateur);
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/appli.accueil/LoginView.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -47,15 +66,8 @@ public class InscriptionController {
             Parent root = FXMLLoader.load(getClass().getResource("/appli.accueil/LoginView.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-    }
-    @FXML
-    protected void handleLogout() {
-        SessionUtilisateur.getInstance().deconnecter();
-        System.out.println("Utilisateur déconnecté.");
-// Redirection vers la page de connexion
     }
 }
