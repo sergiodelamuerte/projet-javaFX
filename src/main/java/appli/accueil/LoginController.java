@@ -32,7 +32,7 @@ public class LoginController {
     private Text emailLabel;
 
     @FXML
-    private TextField emailTexte;
+    private TextField emailField;
 
     @FXML
     private Text erreurtext;
@@ -44,7 +44,7 @@ public class LoginController {
     private Text mdpLabel;
 
     @FXML
-    private TextField mdptexte;
+    private TextField mdpField;
 
     @FXML
     private Text nomLabel;
@@ -66,13 +66,13 @@ public class LoginController {
     @FXML
     void connexion(ActionEvent event) {
 
-        String email = emailTexte.getText();
-        String mdp = mdptexte.getText();
+        String email = emailField.getText();
+        String mdp = mdpField.getText();
 
         Utilisateur utilisateur = utilisateurRepository.getUtilisateurParEmail(email);
 
         if (utilisateur == null) {
-            erreurtext.setText("Email ou mot de passe incorrect");
+            erreurtext.setText("Cet Email n'appartient à aucun utilisateur");
             return;
         }
 
@@ -84,7 +84,29 @@ public class LoginController {
         }
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/appli.accueil/accueilView.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("GestionUserView.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void inscription(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("InscriptionView.fxml"));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    void mdpOublie(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("MotDePasseOublieView.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();

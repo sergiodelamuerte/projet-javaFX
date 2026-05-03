@@ -16,9 +16,10 @@
       <Label text="Votre Email!" />
       <TextField fx:id="emailField" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Votre mot de passe:" />
-      <TextField fx:id="motdepassefield" />
+      <TextField fx:id="mdpField" />
+       <Text fx:id="erreurtext" />
       <Button mnemonicParsing="false" onAction="#connexion" text="Connexion" />
-      <Button mnemonicParsing="false" text="Mot de passe oublié" />
+      <Button mnemonicParsing="false" onAction= "#mdpOublie" text="Mot de passe oublié" />
       <Button mnemonicParsing="false" onAction="#inscription" text="Inscription" />
       <Label fx:id="labelCoucou" />
    </children>

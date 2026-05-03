@@ -49,10 +49,10 @@ public class InscriptionController {
         String hash = encoder.encode(m);
 
         Utilisateur utilisateur = new Utilisateur(n, p, e, hash);
-        utilisateurRepository.enregistrerUtilisateur(utilisateur);
+        utilisateurRepository.ajouterUtilisateur(utilisateur);
 
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/appli.accueil/LoginView.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception ex) {
@@ -63,7 +63,7 @@ public class InscriptionController {
     @FXML
     protected void onRetourButtonClick(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/appli.accueil/LoginView.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch (Exception e) {

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class Database {
 
     private static final String SERVEUR = "localhost";
-    private static final String NOM_BDD = "Todolist";
+    private static final String NOM_BDD = "todolist";
     private static final String UTILISATEUR = "root";
     private static final String MOT_DE_PASSE = "";
 

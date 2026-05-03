@@ -18,7 +18,7 @@ public class UtilisateurRepository {
             stmt.setString(1, utilisateur.getNom());
             stmt.setString(2, utilisateur.getPrenom());
             stmt.setString(3, utilisateur.getEmail());
-            stmt.setString(4, utilisateur.getMdp());
+            stmt.setString(4, utilisateur.getMotDePasse());
             stmt.setString(5, utilisateur.getRole());
             stmt.executeUpdate();
             System.out.println("Utilisateur ajouté avec succès !");
@@ -91,8 +91,8 @@ public class UtilisateurRepository {
         }
     }
 
-    public void enregistrerUtilisateur(Utilisateur utilisateur) {
-    }
+
+
 
     public Utilisateur getAllUsers() {
         return null;
