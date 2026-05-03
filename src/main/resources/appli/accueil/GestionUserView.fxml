@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+
+<AnchorPane fx:id="Deconnexion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+
+    <children>
+        <Button fx:id="supprimer" layoutX="468.0" layoutY="37.0" mnemonicParsing="false" text="Supprimer"/>
+        <Button layoutX="461.0" layoutY="325.0" mnemonicParsing="false" text="Deconnexion"/>
+        <Text fx:id="gestionUtilisateurs" layoutX="94.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Gestion des utilisateurs" wrappingWidth="172.13671875"/>
+        <TableView layoutX="-7.0" layoutY="62.0" prefHeight="340.0" prefWidth="428.0"/>
+        <TableView fx:id="tableauUser" prefWidth="600" prefHeight="400" />
+    </children>
+</AnchorPane>
