@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import repository.UtilisateurRepository;
 
 public class ResetPasswordController {
 
@@ -36,6 +38,10 @@ public class ResetPasswordController {
             messageErreur.setText("Les mots de passe ne correspondent pas...");
             return;
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String mdpHashe = encoder.encode(pass1);
+        UtilisateurRepository repo = new UtilisateurRepository();
+        repo.updateMotDePasse(email, mdpHashe);
 
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -44,9 +50,11 @@ public class ResetPasswordController {
             Parent root = loader.load();
             Stage stage = (Stage) newPasswordField.getScene().getWindow();
             stage.setScene(new Scene(root));
+            stage.sizeToScene();
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
+
         }
     }
 }

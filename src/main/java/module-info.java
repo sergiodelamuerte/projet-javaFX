@@ -7,5 +7,7 @@ module appli.accueil {
     requires java.mail;
 
     opens appli.accueil to javafx.fxml;
+    opens appli.user to javafx.fxml;
     exports appli.accueil;
+
 }

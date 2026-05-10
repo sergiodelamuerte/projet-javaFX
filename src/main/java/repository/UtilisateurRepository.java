@@ -94,11 +94,23 @@ public class UtilisateurRepository {
 
 
 
-    public Utilisateur getAllUsers() {
-        return null;
+    public ArrayList<Utilisateur> getAllUsers() {
+        return getTousLesUtilisateurs();
     }
 
     public void update(Utilisateur utilisateurSel) {
+    }
+    public void updateMotDePasse(String email, String nouveauMdp) {
+        String sql = "UPDATE utilisateurs SET mdp = ? WHERE email = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, nouveauMdp);
+            stmt.setString(2, email);
+            stmt.executeUpdate();
+            System.out.println("Mot de passe mis à jour !");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 
