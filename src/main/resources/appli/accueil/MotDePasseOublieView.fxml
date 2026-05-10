@@ -19,6 +19,16 @@
 
     <Button text="Envoyer le code"
             onAction="#envoyerCode"
-            style="-fx-background-color: #4CAF50; -fx-text-fill: white;" />
+            />
+    <Label text="Entrez le code reçu :" fx:id="labelCode" visible="false" managed="false"/>
+    <TextField fx:id="codeField" promptText="Code à 6 chiffres" prefWidth="250"
+               visible="false" managed="false"/>
+    <Button text="Vérifier le code"
+            onAction="#verifierCode"
+            fx:id="btnVerifier"
+            visible="false" managed="false"/>
+
+    <Label fx:id="messageLabel"/>
+
 
 </VBox>

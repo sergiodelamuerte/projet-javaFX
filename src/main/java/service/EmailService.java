@@ -8,8 +8,8 @@ import javax.mail.internet.MimeMessage;
 
 public class EmailService {
 
-    private static final String EMAIL_SENDER = "votre-email@gmail.com";
-    private static final String PASSWORD = "votre-mot-de-passe";
+    private static final String EMAIL_SENDER = "serge.kibeti@gmail.com";
+    private static final String PASSWORD = "fqva ceds hkho fczi";
 
     private static final SecureRandom random = new SecureRandom();
 
