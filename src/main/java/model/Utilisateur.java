@@ -8,6 +8,7 @@ public class Utilisateur {
     private String prenom;
     private String email;
     private String motDePasse;
+    private String role;
 
 
     public Utilisateur(int id, String nom, String prenom, String email, String motDePasse) {
@@ -87,13 +88,11 @@ public class Utilisateur {
 
 
     public String getRole() {
-        return "";
+        return role != null ? role : "";
     }
 
-    public String getIdUser() {
-        return "";
-    }
 
     public void setRole(String text) {
+        this.role = role;
     }
 }

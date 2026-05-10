@@ -8,6 +8,7 @@ module appli.accueil {
 
     opens appli.accueil to javafx.fxml;
     opens appli.user to javafx.fxml;
+    opens model to javafx.base, javafx.fxml;
     exports appli.accueil;
 
 }

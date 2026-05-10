@@ -34,7 +34,14 @@ public class UtilisateurRepository {
             stmt.setString(1, email);
             ResultSet Rs = stmt.executeQuery();
             if (Rs.next()) {
-                Utilisateur user = new Utilisateur(Rs.getInt("id"), Rs.getString("nom"), Rs.getString("prenom"), Rs.getString("email"), Rs.getString("mdp"));
+                Utilisateur user = new Utilisateur(
+                        Rs.getInt("id"),
+                        Rs.getString("nom"),
+                        Rs.getString("prenom"),
+                        Rs.getString("email"),
+                        Rs.getString("mdp")
+                );
+                user.setRole(Rs.getString("role"));
                 return user;
             }
         } catch (SQLException e) {
@@ -51,10 +58,15 @@ public class UtilisateurRepository {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet Rs = stmt.executeQuery();
             while (Rs.next()) {
-                Utilisateur user = new Utilisateur(Rs.getInt("id"), Rs.getString("nom"), Rs.getString("prenom"), Rs.getString("email"), Rs.getString("mdp"));
+                Utilisateur user = new Utilisateur(
+                        Rs.getInt("id"),
+                        Rs.getString("nom"),
+                        Rs.getString("prenom"),
+                        Rs.getString("email"),
+                        Rs.getString("mdp")
+                );
+                user.setRole(Rs.getString("role"));
                 utilisateurs.add(user);
-
-
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

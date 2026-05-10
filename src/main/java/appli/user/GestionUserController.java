@@ -30,14 +30,13 @@ public class GestionUserController implements Initializable {
         chargerUtilisateurs();
         btnSupprimer.setDisable(true);
     }
-
     private void initColonnes() {
         String[][] colonnes = {
                 {"Id", "id"},
                 {"Nom", "nom"},
                 {"Prénom", "prenom"},
-                {"Email", "email"},
-                {"Rôle", "role"}
+                {"Email", "email"}
+
         };
 
         for (String[] col : colonnes) {
@@ -46,6 +45,7 @@ public class GestionUserController implements Initializable {
             tableauUser.getColumns().add(c);
         }
     }
+
 
     private void chargerUtilisateurs() {
         tableauUser.getItems().clear();
